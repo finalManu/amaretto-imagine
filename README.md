@@ -1,6 +1,14 @@
 # Amaretto Imagine
 
-## TODO (Generated)
+## TODO
+
+### UI Scaffolding
+
+- [ ] Create basic layout and navigation
+- [ ] Build dashboard and gallery views with mock data
+- [ ] Build image generation form UI (non-functional)
+- [ ] Set up basic routing structure
+- [ ] Implement responsive design foundations
 
 ### Foundation & Authentication
 
@@ -26,10 +34,9 @@
 
 ### Dashboard & Views
 
-- [ ] Design and implement main dashboard UI
-- [ ] Create book-specific image gallery view
+- [ ] Connect dashboard to real data
+- [ ] Implement book-specific gallery functionality
 - [ ] Implement author-based filtering
-- [ ] Add general image gallery view
 - [ ] Create filtering and sorting options
 
 ### Image Generation Enhancement
@@ -44,7 +51,6 @@
 
 ### Polish & Additional Features
 
-- [ ] Implement responsive design
 - [ ] Add loading states and error handling
 - [ ] Implement rate limiting for image generation
 - [ ] Add user preferences and settings
@@ -61,6 +67,7 @@
 
 ### Testing & Deployment
 
+- [x] Deploy (vercel)
 - [ ] Write unit tests
 - [ ] Implement integration tests
 - [ ] Set up CI/CD pipeline
