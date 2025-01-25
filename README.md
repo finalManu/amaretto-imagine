@@ -4,8 +4,9 @@
 
 ### UI Scaffolding
 
+- [x] Scaffold basic UI with mock data
 - [ ] Create basic layout and navigation
-- [ ] Build dashboard and gallery views with mock data
+- [ ] Build dashboard and gallery views
 - [ ] Build image generation form UI (non-functional)
 - [ ] Set up basic routing structure
 - [ ] Implement responsive design foundations
