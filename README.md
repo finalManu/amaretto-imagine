@@ -5,6 +5,7 @@
 ### UI Scaffolding
 
 - [x] Scaffold basic UI with mock data
+- [x] Attach database to UI
 - [ ] Create basic layout and navigation
 - [ ] Build dashboard and gallery views
 - [ ] Build image generation form UI (non-functional)

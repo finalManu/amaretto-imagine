@@ -3,30 +3,15 @@ import { db } from "~/server/db";
 
 export const dynamic = "force-dynamic";
 
-const mockUrls = [
-  "https://4grk8c4nb6.ufs.sh/f/hTMofYr9TDJnnkylAf3QXSabjqIUyNRpHJ0mvhVunsiPt93B",
-  "https://4grk8c4nb6.ufs.sh/f/hTMofYr9TDJniDPG0PJ5No8mvt0KDTzyUc1aCfAW9wgpJPdY",
-  "https://4grk8c4nb6.ufs.sh/f/hTMofYr9TDJnAz0J7a6fR1xtBLXiaT3vUhVzF8K0oCGQl6E9",
-  "https://4grk8c4nb6.ufs.sh/f/hTMofYr9TDJnpQI7BHG9bzIEUmFHDQekOuPg6vK2T0j1A3No",
-];
-
-const mockImages = mockUrls.map((url, index) => ({
-  id: index + 1,
-  url,
-}));
-
 export default async function HomePage() {
-  const posts = await db.query.posts.findMany();
-
-  console.log(posts);
+  const images = await db.query.images.findMany({
+    orderBy: (model, { desc }) => desc(model.id),
+  });
 
   return (
     <main className="">
       <div className="flex flex-wrap gap-4">
-        {posts.map((post) => (
-          <div key={post.id}>{post.name}</div>
-        ))}
-        {mockImages.map((image) => (
+        {images.map((image) => (
           <div key={image.id} className="relative h-48">
             <Image
               src={image.url}
@@ -37,6 +22,7 @@ export default async function HomePage() {
               style={{ width: "auto" }}
               unoptimized // Skips Next.js's built-in image optimization - images won't be resized, optimized or served from Next.js's image optimization API. Useful when images are already optimized or served from an external CDN.
             />
+            <div>{image.name}</div>
           </div>
         ))}
       </div>
