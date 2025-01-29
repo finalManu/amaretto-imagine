@@ -9,7 +9,7 @@ async function Images() {
     orderBy: (model, { desc }) => desc(model.id),
   });
   return (
-    <div className="flex flex-wrap gap-4">
+    <div className="flex flex-wrap gap-x-4 gap-y-12">
       {images.map((image) => (
         <div key={image.id} className="relative h-48">
           <Image
@@ -21,7 +21,7 @@ async function Images() {
             style={{ width: "auto" }}
             unoptimized // Skips Next.js's built-in image optimization - images won't be resized, optimized or served from Next.js's image optimization API. Useful when images are already optimized or served from an external CDN.
           />
-          <div>{image.name}</div>
+          <div>{image.name.slice(0, 10)}</div>
         </div>
       ))}
     </div>
