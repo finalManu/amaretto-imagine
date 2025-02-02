@@ -62,6 +62,7 @@
 ### Performance & Security
 
 - [x] Tidy up build process
+- [x] Error Management (w/ Sentry)
 - [ ] Optimize image loading and caching
 - [ ] Implement security best practices
 - [ ] Add input validation and sanitization

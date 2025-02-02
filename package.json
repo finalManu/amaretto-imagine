@@ -10,7 +10,7 @@
     "db:migrate": "drizzle-kit migrate",
     "db:push": "drizzle-kit push",
     "db:studio": "drizzle-kit studio",
-    "dev": "next dev --turbo",
+    "dev": "next dev",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "preview": "next build && next start",
@@ -22,6 +22,7 @@
   "dependencies": {
     "@clerk/nextjs": "^6.10.3",
     "@neondatabase/serverless": "^0.10.4",
+    "@sentry/nextjs": "^8",
     "@t3-oss/env-nextjs": "^0.10.1",
     "@uploadthing/react": "^7.1.5",
     "drizzle-orm": "^0.33.0",
