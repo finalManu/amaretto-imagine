@@ -1,4 +1,5 @@
 import { getImage } from "~/server/queries";
+import { Modal } from "./modal";
 
 export default async function ImageModal({
   params,
@@ -12,8 +13,8 @@ export default async function ImageModal({
 
   const image = await getImage(idAsNumber);
   return (
-    <div>
+    <Modal>
       <img src={image.url} className="w-96" alt="" />
-    </div>
+    </Modal>
   );
 }
