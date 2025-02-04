@@ -27,7 +27,7 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode; modal: React.ReactNode }>) {
   return (
     <ClerkProvider>
-      <html lang="en" className={`${GeistSans.variable}`}>
+      <html lang="en">
         <NextSSRPlugin
           /**
            * The `extractRouterConfig` will extract **only** the route configs
@@ -37,10 +37,14 @@ export default function RootLayout({
            */
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
-        <body className="flex flex-col gap-4">
+        <body
+          className={`font-sans ${GeistSans.variable} flex h-screen flex-col`}
+        >
           <TopNav />
-          {children}
-          {modal}
+          <main className="relative min-h-0 flex-1">
+            {children}
+            {modal}
+          </main>
           <div id="modal-root" />
         </body>
       </html>
