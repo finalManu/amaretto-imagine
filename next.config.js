@@ -19,6 +19,11 @@ const coreConfig = {
         hostname: "4grk8c4nb6.ufs.sh",
         pathname: "/f/**",
       },
+      {
+        protocol: "https",
+        hostname: "utfs.io",
+        pathname: "/f/**",
+      },
     ],
   },
 };
