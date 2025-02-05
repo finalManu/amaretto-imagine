@@ -40,8 +40,9 @@ export default function RootLayout({
         <body
           className={`font-sans ${GeistSans.variable} flex h-screen flex-col`}
         >
-          <div className="grid-rows-[auto, 1fr] grid h-screen">
+          <div className="grid h-screen grid-rows-[min-content,1fr]">
             <TopNav />
+            {/* <main>{children}</main> */}
             <main className="overflow-y-scroll">{children}</main>
           </div>
           {modal}
