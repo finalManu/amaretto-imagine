@@ -4,6 +4,9 @@ import Link from "next/link";
 import { db } from "~/server/db";
 import { getMyImages } from "~/server/queries";
 
+// Forces Next.js to render the page dynamically on every request, bypassing static rendering and caching.
+// Needed when we want real-time data updates, like showing the latest uploaded images.
+//have it just in case now to be sure, but technically not needed right now
 export const dynamic = "force-dynamic";
 
 async function Images() {
@@ -24,7 +27,7 @@ async function Images() {
               unoptimized // Skips Next.js's built-in image optimization - images won't be resized, optimized or served from Next.js's image optimization API. Useful when images are already optimized or served from an external CDN.
             />
           </Link>
-          <div>{image.name.slice(0, 10)}</div>
+          <div>{image.name.slice(0, 11)}</div>
         </div>
       ))}
     </div>
