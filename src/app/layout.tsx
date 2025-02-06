@@ -38,7 +38,7 @@ export default function RootLayout({
           routerConfig={extractRouterConfig(ourFileRouter)}
         />
         <body
-          className={`font-sans ${GeistSans.variable} flex h-screen flex-col`}
+          className={`font-sans ${GeistSans.variable} dark flex h-screen flex-col`}
         >
           <div className="grid h-screen grid-rows-[min-content,1fr]">
             <TopNav />
