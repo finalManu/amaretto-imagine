@@ -38,6 +38,9 @@ dependencies:
   next:
     specifier: ^15.0.1
     version: 15.1.5(@babel/core@7.26.7)(@opentelemetry/api@1.9.0)(react-dom@18.3.1)(react@18.3.1)
+  next-themes:
+    specifier: ^0.4.4
+    version: 0.4.4(react-dom@18.3.1)(react@18.3.1)
   postgres:
     specifier: ^3.4.4
     version: 3.4.5
@@ -50,6 +53,9 @@ dependencies:
   server-only:
     specifier: ^0.0.1
     version: 0.0.1
+  sonner:
+    specifier: ^1.7.4
+    version: 1.7.4(react-dom@18.3.1)(react@18.3.1)
   tailwind-merge:
     specifier: ^3.0.1
     version: 3.0.1
@@ -4458,6 +4464,16 @@ packages:
     resolution: {integrity: sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==}
     dev: false
 
+  /next-themes@0.4.4(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-LDQ2qIOJF0VnuVrrMSMLrWGjRMkq+0mpgl6e0juCLqdJ+oo8Q84JRWT6Wh11VDQKkMMe+dVzDKLWs5n87T+PkQ==}
+    peerDependencies:
+      react: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+      react-dom: ^16.8 || ^17 || ^18 || ^19 || ^19.0.0-rc
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+    dev: false
+
   /next@15.1.5(@babel/core@7.26.7)(@opentelemetry/api@1.9.0)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-Cf/TEegnt01hn3Hoywh6N8fvkhbOuChO4wFje24+a86wKOubgVaWkDqxGVgoWlz2Hp9luMJ9zw3epftujdnUOg==}
     engines: {node: ^18.18.0 || ^19.8.0 || >= 20.0.0}
@@ -5318,6 +5334,16 @@ packages:
       map-obj: 4.3.0
       snake-case: 3.0.4
       type-fest: 4.33.0
+    dev: false
+
+  /sonner@1.7.4(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-DIS8z4PfJRbIyfVFDVnK9rO3eYDtse4Omcm6bt0oEr5/jtLgysmjuBl1frJ9E/EQZrFmKx2A8m/s5s9CRXIzhw==}
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+      react-dom: ^18.0.0 || ^19.0.0 || ^19.0.0-rc
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /source-map-js@1.2.1:

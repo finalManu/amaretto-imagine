@@ -7,6 +7,8 @@
 - [x] Scaffold basic UI with mock data
 - [x] Attach database to UI
 - [x] Routing/Image page (parallel route)
+- [x] Update Upload Button
+- [ ] Shadcn Toasts
 - [ ] Create basic layout and navigation
 - [ ] Build dashboard and gallery views
 - [ ] Build image generation form UI (non-functional)
