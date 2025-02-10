@@ -1,8 +1,12 @@
-import { getImage } from "~/server/queries";
+import { deleteImage, getImage } from "~/server/queries";
 import Image from "next/image";
 import { clerkClient } from "@clerk/nextjs/server";
+import { Button } from "./ui/button";
 
 export default async function FullPageImageView(props: { id: number }) {
+  const idAsNumber = Number(props.id);
+  if (Number.isNaN(idAsNumber)) throw new Error("Invalid photo id");
+
   const image = await getImage(props.id);
   const uploaderInfo = await (await clerkClient()).users.getUser(image.userId);
 
@@ -30,6 +34,18 @@ since it is uploaded by user. File PR if I see a way to fix this.
         <div className="flex flex-col p-2">
           <span>Created on:</span>
           <span>{new Date(image.createdAt).toLocaleDateString()}</span>
+        </div>
+        <div className="flex flex-col p-2">
+          <form
+            action={async () => {
+              "use server"; //allows us to bind the deleteImage fn to the form on the client with no JS running on the client
+              await deleteImage(idAsNumber);
+            }}
+          >
+            <Button type="submit" variant="destructive">
+              Delete
+            </Button>
+          </form>
         </div>
       </div>
     </div>
