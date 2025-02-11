@@ -41,4 +41,4 @@ This project is built using the [T3 Stack](https://create.t3.gg/) with React Ser
 - 🎛️ Multiple AI model support for image generation
 - 🎨 Design system
 - 🔗 Social sharing features
-- 📱 React Native mobile app for scanning book descriptions, automatically generating uploading images
+- 📱 React Native mobile app for scanning book descriptions and automatically generating uploading images
