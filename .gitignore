@@ -46,3 +46,8 @@ yarn-error.log*
 .idea
 # Sentry Config File
 .env.sentry-build-plugin
+
+# TODO.md
+TODO.md
+
+
