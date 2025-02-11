@@ -3,6 +3,7 @@ import { createUploadthing, type FileRouter } from "uploadthing/next";
 import { UploadThingError } from "uploadthing/server";
 import { db } from "~/server/db";
 import { images } from "~/server/db/schema";
+import { ratelimit } from "~/server/ratelimit";
 
 const f = createUploadthing();
 
@@ -21,12 +22,18 @@ export const ourFileRouter = {
   })
     // Set permissions and file types for this FileRoute
     .middleware(async ({ req }) => {
+      //req has a lot of cool options (check nextjs docs or just console.log it)
       // This code runs on your server before upload
       const user = await auth();
 
       // If you throw, the user will not be able to upload
       // eslint-disable-next-line @typescript-eslint/only-throw-error
       if (!user.userId) throw new UploadThingError("Unauthorized");
+
+      const { success } = await ratelimit.limit(user.userId);
+
+      // eslint-disable-next-line @typescript-eslint/only-throw-error
+      if (!success) throw new UploadThingError("Ratelimited");
 
       // Whatever is returned here is accessible in onUploadComplete as `metadata`
       return { userId: user.userId };
