@@ -44,8 +44,12 @@ yarn-error.log*
 
 # idea files
 .idea
-# Sentry Config File
+
+# Sentry Config Files
 .env.sentry-build-plugin
+sentry.client.config.ts
+sentry.server.config.ts
+sentry.edge.config.ts
 
 # TODO.md
 TODO.md
