@@ -202,6 +202,11 @@ export function ImageGenerator() {
             <ImageDisplay
               image={imageData.image}
               elapsedTime={imageData.elapsedTime}
+              prompt={prompt}
+              model={imageData.model}
+              onSaveComplete={() => {
+                // Optionally show a success message or update UI
+              }}
             />
           </div>
         ))}
