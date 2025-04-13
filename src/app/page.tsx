@@ -27,7 +27,9 @@ async function Images() {
               unoptimized // Skips Next.js's built-in image optimization - images won't be resized, optimized or served from Next.js's image optimization API. Useful when images are already optimized or served from an external CDN.
             />
           </Link>
-          <div>{image.name.slice(0, 11)}</div>
+          <div className="mt-2 max-w-[200px] truncate text-sm font-medium">
+            {image.name.replace(/\.png$/, "")}
+          </div>
         </div>
       ))}
     </div>

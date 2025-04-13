@@ -12,6 +12,11 @@ const redis = new Redis({
 // Set expiry time to 30 minutes to give enough time for the upload process
 const PROMPT_EXPIRY_SECONDS = 30 * 60; // 30 minutes
 
+interface PromptData {
+  prompt: string;
+  customName?: string;
+}
+
 export async function POST(request: Request) {
   try {
     const user = await auth();
@@ -20,15 +25,18 @@ export async function POST(request: Request) {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    const { prompt, timestamp } = (await request.json()) as {
+    const { prompt, timestamp, customName } = (await request.json()) as {
       prompt: string;
       timestamp: string;
+      customName?: string;
     };
 
     console.log("POST prompt-storage request:", {
       userId: user.userId,
       timestamp,
       promptLength: prompt?.length || 0,
+      hasCustomName: !!customName,
+      customName,
     });
 
     if (!prompt || !timestamp) {
@@ -40,9 +48,17 @@ export async function POST(request: Request) {
     const key = `prompt:${user.userId}:${timestamp}`;
     console.log("Storing prompt with key:", key);
 
+    // Store prompt and custom name as an object
+    const dataToStore: PromptData = {
+      prompt,
+      ...(customName && { customName }),
+    };
+
     // Store in Redis with expiry
-    await redis.set(key, prompt, { ex: PROMPT_EXPIRY_SECONDS });
-    console.log("Successfully stored prompt in Redis");
+    await redis.set(key, JSON.stringify(dataToStore), {
+      ex: PROMPT_EXPIRY_SECONDS,
+    });
+    console.log("Successfully stored prompt data in Redis");
 
     return NextResponse.json({
       success: true,
@@ -105,13 +121,13 @@ export async function GET(request: Request) {
     const key = `prompt:${userId}:${timestamp}`;
     console.log("Looking up prompt with key:", key);
 
-    const prompt = await redis.get(key);
+    const storedData = await redis.get(key);
     console.log("Prompt retrieval result:", {
-      found: !!prompt,
-      promptLength: typeof prompt === "string" ? prompt.length : 0,
+      found: !!storedData,
+      dataType: typeof storedData,
     });
 
-    if (!prompt) {
+    if (!storedData) {
       console.warn(`Prompt not found for key: ${key}`);
       return NextResponse.json(
         {
@@ -122,8 +138,25 @@ export async function GET(request: Request) {
       );
     }
 
-    // Return the found prompt
-    return NextResponse.json({ success: true, prompt });
+    // Parse the stored data
+    try {
+      const data = JSON.parse(storedData as string) as PromptData;
+      console.log("Successfully parsed prompt data:", {
+        hasCustomName: !!data.customName,
+      });
+      // Return just the prompt text and customName separately
+      return NextResponse.json({
+        success: true,
+        prompt: data.prompt,
+        customName: data.customName,
+      });
+    } catch (error) {
+      // For backward compatibility - if the stored data is just a string (old format)
+      console.log(
+        "Stored data is in old format (string), using as prompt only",
+      );
+      return NextResponse.json({ success: true, prompt: storedData as string });
+    }
   } catch (error) {
     console.error("Error retrieving prompt:", error);
     return NextResponse.json(

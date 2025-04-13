@@ -83,7 +83,30 @@ since it is uploaded by user. File PR if I see a way to fix this.
           <div className="flex flex-col p-2">
             <span>Prompt:</span>
             <span className="text-sm text-muted-foreground">
-              {image.prompt}
+              {(() => {
+                // Check if prompt is a JSON string
+                try {
+                  interface PromptData {
+                    prompt: string;
+                    customName?: string;
+                  }
+
+                  const promptData = JSON.parse(image.prompt) as PromptData;
+                  // If it's our expected format with a prompt field, use that
+                  if (
+                    promptData &&
+                    typeof promptData === "object" &&
+                    typeof promptData.prompt === "string"
+                  ) {
+                    return promptData.prompt;
+                  }
+                  // Otherwise, just show the stringified JSON
+                  return image.prompt;
+                } catch (e) {
+                  // If it's not JSON, just return the raw prompt
+                  return image.prompt;
+                }
+              })()}
             </span>
           </div>
         )}

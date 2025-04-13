@@ -80,6 +80,7 @@ export const ourFileRouter = {
 
       // Try to get the prompt from our temporary API
       let prompt: string | undefined;
+      let displayName: string | undefined;
       console.log("File info:", {
         name: file.name,
         isGenerated,
@@ -130,14 +131,23 @@ export const ourFileRouter = {
               type PromptResponse = {
                 success: boolean;
                 prompt?: string;
+                customName?: string;
                 error?: string;
               };
 
               const data = (await response.json()) as PromptResponse;
               if (data.success && data.prompt) {
+                // Store just the prompt text, not the entire JSON object
                 prompt = data.prompt;
+                // Store customName for later use but don't modify read-only file.name
+                if (data.customName) {
+                  displayName = `${data.customName}.png`;
+                  console.log("Using custom name from API:", displayName);
+                }
                 success = true;
-                console.log("Successfully retrieved prompt for image");
+                console.log(
+                  "Successfully retrieved prompt and custom name for image",
+                );
               } else {
                 console.warn(
                   "Prompt retrieval returned success=false:",
@@ -169,14 +179,15 @@ export const ourFileRouter = {
 
       // Insert the image record with any prompt we were able to retrieve
       console.log("About to save image with data:", {
-        name: file.name,
+        name: displayName ?? file.name,
+        originalFileName: file.name,
         promptAvailable: !!prompt,
-        promptValue: prompt,
         model: isGenerated ? model : undefined,
       });
 
+      // Save the image with the custom display name if available
       await db.insert(images).values({
-        name: file.name,
+        name: displayName ?? file.name,
         url: file.url,
         userId: metadata.userId,
         model: isGenerated ? model : undefined,
